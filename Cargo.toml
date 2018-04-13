@@ -1,0 +1,6 @@
+[package]
+name = "dotenv_cli"
+version = "0.0.1"
+authors = ["Sasha Chedygov <sasha@chedygov.com>"]
+
+[dependencies]
