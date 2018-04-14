@@ -27,6 +27,16 @@ Then run your program via dotenv_cli:
 $ dotenv your-program arg1 arg2 ...
 ```
 
+### .env file format
+
+Each line of a `.env` file must contain one of the following:
+
+* Nothing (will be ignored)
+* A comment starting with `#`
+* A key/value pair, separated by an equals sign (like  `KEY=value`)
+
+Keys must only contain uppercase, alphanumeric ASCII characters, and cannot start with a number. Any whitespace found after the equals sign will be treated as part of the value.
+
 ### Roadmap
 
 This is a very early release, and not intented to be used in production yet. Major todo items (roughly in order):
@@ -35,4 +45,3 @@ This is a very early release, and not intented to be used in production yet. Maj
 - [ ] Add binary releases and introduce an official installation path for each platform
 - [ ] Add tests
 - [ ] Add Windows support
-
