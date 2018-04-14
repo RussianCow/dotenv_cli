@@ -2,19 +2,17 @@ use std::collections::HashMap;
 use std::fs::File;
 use std::io::prelude::*;
 use std::io::BufReader;
-use std::path::{Path};
-
+use std::path::Path;
 
 pub fn parse_file(path: &Path) -> HashMap<String, String> {
-	let file = File::open(path)
-		.expect("There is no .env file in the current directory.");
+	let file = File::open(path).expect("There is no .env file in the current directory.");
 	let reader = BufReader::new(file);
 	let mut vars: HashMap<String, String> = HashMap::new();
 
 	for line in reader.lines() {
 		let maybe_key_value = parse_line(line.unwrap());
 		if maybe_key_value.is_none() {
-			continue
+			continue;
 		}
 		let (key, value) = maybe_key_value.unwrap();
 		vars.insert(key, value);
@@ -22,7 +20,6 @@ pub fn parse_file(path: &Path) -> HashMap<String, String> {
 
 	vars
 }
-
 
 fn parse_line(line: String) -> Option<(String, String)> {
 	let mut key = String::new();
@@ -34,7 +31,7 @@ fn parse_line(line: String) -> Option<(String, String)> {
 
 		// Skip comments
 		if is_first && character == '#' {
-			break
+			break;
 		}
 
 		if !character.is_ascii() {
@@ -43,13 +40,8 @@ fn parse_line(line: String) -> Option<(String, String)> {
 		if is_first && character.is_numeric() {
 			panic!("The first character of an environment variable cannot be a number.");
 		}
-		if
-			!is_past_equal_sign
-			&& (
-			!character.is_numeric()
-				&& !character.is_uppercase()
-				&& character != '='
-			)
+		if !is_past_equal_sign
+			&& (!character.is_numeric() && !character.is_uppercase() && character != '=')
 		{
 			panic!("Invalid character in key name: {}", character);
 		}
