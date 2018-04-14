@@ -5,7 +5,8 @@ use std::io::BufReader;
 use std::path::Path;
 
 pub fn parse_file(path: &Path) -> HashMap<String, String> {
-	let file = File::open(path).expect("There is no .env file in the current directory.");
+	let file = File::open(path)
+		.expect("There is no .env file in the current directory.");
 	let reader = BufReader::new(file);
 	let mut vars: HashMap<String, String> = HashMap::new();
 
@@ -41,7 +42,8 @@ fn parse_line(line: String) -> Option<(String, String)> {
 			panic!("The first character of an environment variable cannot be a number.");
 		}
 		if !is_past_equal_sign
-			&& (!character.is_numeric() && !character.is_uppercase() && character != '=')
+			&& (!character.is_numeric() && !character.is_uppercase()
+				&& character != '=')
 		{
 			panic!("Invalid character in key name: {}", character);
 		}

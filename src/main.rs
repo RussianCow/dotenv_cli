@@ -7,7 +7,8 @@ use std::process::Command;
 use parser::parse_file;
 
 fn main() {
-	let cwd = env::current_dir().expect("Could not get current working directory.");
+	let cwd =
+		env::current_dir().expect("Could not get current working directory.");
 	let path: PathBuf = [cwd, ".env".into()].iter().collect();
 	let additional_env_vars = parse_file(&path);
 
@@ -21,7 +22,8 @@ fn main() {
 	for (key, value) in additional_env_vars.iter() {
 		command.env(key, value);
 	}
-	command
-		.spawn()
-		.expect(&format!("Could not run the command: {}", command_name));
+	command.spawn().expect(&format!(
+		"Could not run the command: {}",
+		command_name
+	));
 }
